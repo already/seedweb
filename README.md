@@ -17,6 +17,6 @@ seedweb/<br>
 
 `mvn clean install -Dmaven.test.skip`
 
-&nbsp;&nbsp;&nbsp;&nbsp;seed-onejar/target 下产生可执行jar包(E模式),在windows下点击seed-onejar/run.bat 即可启动一个独立web服务。seedweb-ex/target 下产生war包（c模式）
+&nbsp;&nbsp;&nbsp;&nbsp;seed-onejar/target 下产生可执行jar包(E模式),在windows下点击seed-onejar/run.bat 即可启动一个独立web服务,浏览器访问localhost 即可看到seedweb说明。seedweb-ex/target 下产生war包（c模式）
 
 &nbsp;&nbsp;&nbsp;&nbsp;框架包(seed-frame)中类20个左右，核心的8个。SeedWeb 的请求上下文的载体是ThreadLocal,其中ThreadLocalUtils、WebContextUtils 支持request被线程处理期间的上下文工作。SeedWeb对请求和回传的处理交由AOP来拦截处理，由切面RequestAspectj、 枚举ResponseType来支持，其中ResponseType封装了请求后的反馈动作。SeedWeb的注解后业务方法、以及相关的 初始化工作由WebApplicationContext、MethodContext来处理。以及处理工具类WebUtils、RestfulUtils(支持restful的请求处理)
