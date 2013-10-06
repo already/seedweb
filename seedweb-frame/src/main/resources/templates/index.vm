@@ -90,7 +90,7 @@ seedweb/
 seed-onejar/target 下产生可执行jar包<code>(E模式)</code>,在windows下点击seed-onejar/run.bat 即可启动一个独立web服务。seedweb-ex/target 下产生war包<code>（c模式）</code></p>
  	
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	框架包(seed-frame)中类20个左右，核心的10个左右。SeedWeb 的请求上下文的载体是ThreadLocal,其中<code>ThreadLocalUtils、WebContextUtils</code>
+	框架包(seed-frame)中类20个左右，核心的8个。SeedWeb 的请求上下文的载体是ThreadLocal,其中<code>ThreadLocalUtils、WebContextUtils</code>
 	支持request被线程处理期间的上下文工作。SeedWeb对请求和回传的处理交由AOP来拦截处理，由切面<code>RequestAspectj</code>、
 	枚举<code>ResponseType</code>来支持，其中ResponseType封装了请求后的反馈动作。SeedWeb的注解后业务方法、以及相关的
 	初始化工作由<code>WebApplicationContext、MethodContext</code>来处理。以及处理工具类<code>WebUtils、RestfulUtils</code>(支持restful的请求处理)
