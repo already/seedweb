@@ -1,0 +1,288 @@
+<html lang="zh-CN">
+   #parse("/templates/modules/default/header.vm")	
+  <body>
+    <a href="#content" class="sr-only">Skip to main content</a>
+
+    <!-- Docs master nav -->
+    <header role="banner" class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SeedWeb</a>
+    </div>
+    <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">起步</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <!-- Docs page layout -->
+    <div id="content" class="bs-header">
+      <div class="container">
+        <h1>起步</h1>
+        <p>快速上手指南。</p>
+      </div>
+    </div>
+	
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-3">
+                    <div class="bs-sidebar hidden-print affix" role="complementary">
+            <ul class="nav bs-sidenav" >
+				<li class="active">
+				  <a href="#download">What's the SeedWeb.</a>
+				</li>
+				<li class="">
+				  <a href="#whats-annotation">注解&例子说明</a>
+				</li> 
+				<li class="">
+				  <a href="#requestMapping">注解@RequestMapping</a>
+				</li>  
+				<li class="">
+				  <a href="#step">注解@Step</a>
+				</li>  				
+            </ul>
+          </div>
+        </div>
+        <div role="main" class="col-md-9">
+          
+
+
+  <!-- Getting started
+  ================================================== -->
+  <div class="bs-docs-section">
+    <div class="page-header">
+      <h1 id="download">What's the SeedWeb</h1>
+    </div>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	SeedWeb生长在spring beans 和aop 上，分为E模式（embedded type）和C模式（Container type）.
+	<code>E模式（embedded type）</code>是独立jar包运行，提供web服务，独立完成业务需求。<code>C模式（Container type）
+	</code>可以部署在Tomcat、Resin等服务器，完成业务需求。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	SeedWeb是一个简单的web框架。它主要通过注解，完成地址到业务handler的映射，并支持rest,视图层面暂时支持velocity。
+	同时自定义了一套Steps的概念，通过注解和简单编码，可以对业务的前置检测提供灵活、粒度更小的工作支持。
+	针对E模式，单独提供filter完成来自于jar的js、css、图片的读取。它有两个重要注解 
+	<code><a href="#requestMapping">@requestMapping</a> ,<a href="#step">@Step</a></code>来作为业务数据流转的桥梁。</p>
+	
+    <h3 id="download-additional">工程目录结构</h3>
+	<div class="highlight">
+<pre><code class="language-bash">
+seedweb/
+├── seedweb-frame/
+├── seedweb-onejar/
+└── seedweb-ex/
+</code></pre>
+</div>
+<p>进入项目根目录,输入以下命令或点击<code>install.bat</code></p>
+      <div class="highlight">
+       <p><code>mvn clean install -Dmaven.test.skip</code></p>
+       </div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+seed-onejar/target 下产生可执行jar包<code>(E模式)</code>,在windows下点击seed-onejar/run.bat 即可启动一个独立web服务。seedweb-ex/target 下产生war包<code>（c模式）</code></p>
+ 	
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	框架包(seed-frame)中类20个左右，核心的10个左右。SeedWeb 的请求上下文的载体是ThreadLocal,其中<code>ThreadLocalUtils、WebContextUtils</code>
+	支持request被线程处理期间的上下文工作。SeedWeb对请求和回传的处理交由AOP来拦截处理，由切面<code>RequestAspectj</code>、
+	枚举<code>ResponseType</code>来支持，其中ResponseType封装了请求后的反馈动作。SeedWeb的注解后业务方法、以及相关的
+	初始化工作由<code>WebApplicationContext、MethodContext</code>来处理。以及处理工具类<code>WebUtils、RestfulUtils</code>(支持restful的请求处理)
+	</p>	
+	
+    <div class="bs-docs-dl-options">
+      <h4>
+        <a href="#">下载源码</a>
+      </h4>
+      <p>从GitHub可以直接下载到SeedWeb的源码。</p>
+      <h4>
+        <a href="#">Clone or fork via GitHub</a>
+      </h4>
+      <p>访问Github源码库，你可以克隆整个项目，或者fork整个项目到你自己的账号。</p>
+    </div>
+  </div>
+
+
+
+  <!-- File structure
+  ================================================== -->
+  <div class="bs-docs-section">
+    <div class="page-header">
+      <h1 id="whats-annotation">注解&例子说明</h1>
+    </div>
+    <p class="lead"><a id="requestMapping" herf="#">@RequestMapping</a></p>
+	<p> <code>@RequestMapping</code> 注解，负责path地址映射（包括Rest风格请求），steps组织（step参看@Step），返回数据控制（Html、Json、Text）。
+	使用方式如代码示例。1.参数获取。WebUtils负责获取request参数（post、get）。RestfulUtils负责获取rest请求参数。
+	2.业务处理，需要@RequestMapping注解类和相关业务方法。
+	3.业务处理与视图映射。继承 handlerSupport,内置putView方法，数据通过他与view 建立联系。
+	4.steps功能的使用，需要<code><a href="#step">@Step</a></code>配合
+	</p>
+<div class="highlight">
+<pre><code class="language-bash">
+@Component
+@RequestMapping
+public class PathTestHandler extends HandlerSupport{
+	private static final Logger log = LoggerFactory.getLogger(PathTestHandler.class);
+	
+	@RequestMapping(value="/test",resType=ResponseType.HTML,steps="ipFilter{ips:192.168.85.12}")
+	public void testOnlyRequestParamAndReturnHtml(){
+		putView("test", "/asd ok");
+		putView("rid", WebUtils.getIntParam("rid"));
+		putView("rname", WebUtils.getStringParam("rname"));
+	}
+	
+	<span class="comment">&lt;!-- 通过"step(ipFilter)"做"/test"的前置验证(不通过)--&gt;</span>
+	点击:<a href="test" target="_blank">/test</a>
+	
+	@RequestMapping(value="/test1",resType=ResponseType.JSON,steps="ipFilter{ips:127.0.0.1}")
+	public Object testOnlyReturnJson(){
+		Map<String,String> test = new HashMap<String,String>();
+		test.put("obj1", "obj1");
+		test.put("obj2", "obj2");
+		test.put("obj3", "obj3");
+		log.info("method"+Thread.currentThread().toString());
+		test.put("thread", Thread.currentThread().toString());
+		try {
+			WebContextUtils.getResponse().getWriter().append("ssssssssssssss");
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return test;
+	}
+	
+	<span class="comment">&lt;!-- 通过"step(ipFilter)"做"/test"的前置验证(通过)--&gt;</span>
+	点击:<a href="test1" target="_blank">/test1</a>
+	
+	@RequestMapping(value="/user/info/{id}/{info}",resType=ResponseType.JSON)
+	public Object testRestfulAndReturnJson1(){
+		Map<String,Object> test = new HashMap<String,Object>();
+		test.put("id", RestfulUtils.getIntParam("id"));
+		test.put("info", RestfulUtils.getStringParam("info"));
+		test.put("rid", WebUtils.getIntParam("rid"));
+		test.put("rname", WebUtils.getStringParam("rname"));
+		return test;
+	}
+
+	<span class="comment">&lt;!-- 通过"/user/info/{id}/{info}"来实现rest风格请求，使用RestfulUtils
+	获取数据，返回Json数据--&gt;</span>
+	点击:<a href="user/info/9527/whoisyourdad" target="_blank">/user/info/9527/whoisyourdad</a>
+	
+	@RequestMapping(value="/user/{id}/info/{info}",resType=ResponseType.JSON)
+	public Object testRestfulAndReturnJson2(){
+		Map<String,Object> test = new HashMap<String,Object>();
+		test.put("id", RestfulUtils.getIntParam("id"));
+		test.put("info", RestfulUtils.getStringParam("info"));
+		return test;
+	}
+	
+	<span class="comment">&lt;!-- 通过"/user/{id}/info/{info}"来实现rest风格请求，使用RestfulUtils
+	获取数据，返回Json数据--&gt;</span>
+	点击:<a href="user/9527/info/whoisyourdad" target="_blank">/user/9527/info/whoisyourdad</a>
+	
+	@RequestMapping(value="/redirect_test",resType=ResponseType.REDIRECT)
+	public Object testRedirect(){
+		putView("redirect", "/testRedirect ok");
+		return "/test";
+	}
+	
+	<span class="comment">&lt;!-- 重定向，通过"resType=ResponseType.REDIRECT"和return字符串请求“/test”--&gt;</span>
+	点击:<a href="redirect_test" target="_blank">/redirect_test</a>
+	
+	@RequestMapping(value="/forward_test",resType=ResponseType.FORWARD)
+	public Object testForward(){
+		putView("forward", "testForward ok");
+		return "/test";
+	}
+	
+	<span class="comment">&lt;!-- 内部跳转，通过"resType=ResponseType.FORWARD"和return字符串请求“/test”--&gt;</span>
+	点击:<a href="forward_test" target="_blank">/forward_test</a>
+	
+	
+	@RequestMapping(value="/test6")
+	public Object test6(){
+		putView("test5", "555555 ok");
+		WebUtils.redirect("http://www.iqiyi.com");
+		return "http://www.iqiyi.com";
+	}
+	<span class="comment">&lt;!-- 重定向，通过"WebUtils.redirect("http://www.iqiyi.com")"直接重定向”--&gt;</span>
+	点击:<a href="test6" target="_blank">/test6</a>
+	
+	
+	@RequestMapping(value="/test7",resType=ResponseType.JSON)
+	public Object test7(){
+		putView("test5", "555555 ok");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("test5", getView("test5"));
+		map.put("step2", getView("step2"));
+		WebUtils.rentJson(map);
+		forward("/404", "error","无此页面，请联系管理员");
+		return map;
+	}
+	
+	<span class="comment">&lt;!-- 请求直接跳转404--&gt;</span>
+	点击:<a href="test7" target="_blank">/test7</a>
+	
+	@RequestMapping(value="/test8")
+	public Object testJson(){
+		putView("test5", "555555 ok");
+		WebUtils.rentJson("{\"a1\":89;\"a2\":\"a33\"}");
+		return "/test";
+	}
+	
+	<span class="comment">&lt;!-- 通过工具类直接向浏览器输出json--&gt;</span>
+	点击:<a href="test8" target="_blank">/test8</a>
+	
+	@RequestMapping(value="/test9")
+	public Object testRentHtml(){
+		putView("test5", "555555 ok");
+		WebUtils.rentHtml("<html><head></head><body>just html.</body><html>");
+		return "/test";
+	}
+	
+	<span class="comment">&lt;!-- 通过工具类直接向浏览器输出html--&gt;</span>
+	点击:<a href="test9" target="_blank">/test9</a>
+	
+}
+</code></pre>
+
+</div>
+
+    <p class="lead"><a id="step" herf="#">@Step</a></p>
+	<p> <code>@Step</code>配合 <code>@RequestMapping</code>使用，是steps的组成部分。
+	开发者可以细化业务的前置检测处理，如细粒度ip过滤、鉴权等。需要
+	先在相关类和方法注解，然后在requestMapping里使用。代码例子如下：
+	</p>
+	<div class="highlight">
+	<pre><code class="language-bash">
+	@Component
+	@Step
+	public class DefaultSteps {
+		@Step(value="ipFilter")
+		public void ipFilter(){
+		if(!IPMatchHelper.isMatchedIp(WebContextUtils.getExt("ips").toString(), WebUtils.getRemoteIP())){
+		   //通过forward 移交控制权，跳转相关页面。
+			WebUtils.forward("/404", DefaultHandler.MSG,"ip地址不匹配。请联系管理员");
+		}
+	  }
+	}
+
+	<span class="comment">&lt;!-- 通过"step(ipFilter)"做"/test"的前置验证(不通过)--&gt;</span>
+	点击:<a href="test" target="_blank">/test</a>
+	</code></pre>
+	</div>
+  </div>
+  </div>
+        </div>
+      </div>
+
+    </div>
+
+      #include("/templates/modules/default/footer.vm")
+</body></html>

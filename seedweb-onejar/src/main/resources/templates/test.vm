@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>web 测试test</title>
+</head>
+<body>
+this is test page. <br/>
+variable test :$test <br/>
+rid:$rid<br/>
+rname:$rname<br/>
+redirect:$redirect <br/>
+forward:$forward <br/>
+</body> 
+</html>
+
+

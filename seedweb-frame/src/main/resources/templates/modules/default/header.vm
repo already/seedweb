@@ -1,0 +1,38 @@
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author">
+
+<title>
+  
+    起步 · SeedWeb
+  
+</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+<!-- Documentation extras -->
+<link rel="stylesheet" href="docs-assets/css/docs.css">
+<link rel="stylesheet" href="docs-assets/highlight/css/github.css">
+<style>
+body{font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+pre code { background: transparent; }
+</style>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="docs-assets/js/html5shiv.js"></script>
+  <script src="docs-assets/js/respond.min.js"></script>
+<![endif]-->
+
+<link href="icon/favicon.png" rel="shortcut icon">
+
+
+
+  <style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
+  </head>

@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>seedweb</artifactId>
+    <groupId>com.kifanle</groupId>
+    <version>${project.version}</version>
+  </parent>
+  <groupId>com.kifanle</groupId>
+  <artifactId>seedweb-ex</artifactId>
+  <packaging>war</packaging>
+  <name>seedweb-ex</name>
+  <description>this is seedweb's example</description>
+  	<dependencies>
+		<dependency>
+			<groupId>com.kifanle</groupId>
+			<artifactId>seedweb-frame</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+	    <finalName>seedweb</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+		    			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+				    <encoding>UTF-8</encoding>
+					<webResources>
+						<resource>
+							<!-- 元配置文件的目录，相对于pom.xml文件的路径 -->
+							<directory>src/main/webapp/WEB-INF</directory>
+							<!-- 目标路径 -->
+							<targetPath>WEB-INF</targetPath>
+						</resource>
+					</webResources>
+					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

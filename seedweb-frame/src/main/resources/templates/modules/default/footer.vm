@@ -1,0 +1,54 @@
+    <!-- Footer
+    ================================================== -->
+    <footer role="contentinfo" class="bs-footer">
+      <div class="container">
+        <p>手艺人 <a target="_blank" href="http://weibo.com/microboss">@microboss</a> .and <a target="_blank" href="https://github.com/already">@already</a></p> 
+
+        <p>Code licensed under <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.</p>
+        <ul class="footer-links">
+          <li>当前版本： v1.0.0</li>
+          <li class="muted">·</li>
+          <li><a href="https://github.com">github</a></li>
+		  <li class="muted">·</li>
+		  <li><a href="http://www.bootcss.com/">bootcss</a></li>
+        </ul>
+      </div>
+    </footer>
+    <!-- Bootstrap core JavaScript
+
+================================================== -->
+<script src="jquery/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+
+<script src="docs-assets/highlight/js/highlight.js"></script><script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+
+  $(function(){
+
+    setTimeout(function () {
+      var $sideBar = $('.bs-sidebar')
+
+      $sideBar.affix({
+        offset: {
+          top: function () {
+            var offsetTop      = $sideBar.offset().top
+            var sideBarMargin  = parseInt($sideBar.children(0).css('margin-top'), 10)
+            var navOuterHeight = $('.bs-docs-nav').height()
+
+            return (this.top = offsetTop - navOuterHeight - sideBarMargin)
+          }
+        , bottom: function () {
+            return (this.bottom = $('.bs-footer').outerHeight(true))
+          }
+        }
+      })
+    }, 100)
+
+	$('.bs-sidenav li').click(function(){
+		$('.bs-sidenav li').removeClass("active");
+		$(this).addClass("active");
+	});
+})
+
+</script>
