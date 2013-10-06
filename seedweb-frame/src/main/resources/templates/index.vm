@@ -27,8 +27,8 @@
     <!-- Docs page layout -->
     <div id="content" class="bs-header">
       <div class="container">
-        <h1>起步</h1>
-        <p>快速上手指南。</p>
+        <h1>SeedWeb</h1>
+        <p>起步:快速上手指南。</p>
       </div>
     </div>
 	
@@ -98,11 +98,11 @@ seed-onejar/target 下产生可执行jar包<code>(E模式)</code>,在windows下�
 	
     <div class="bs-docs-dl-options">
       <h4>
-        <a href="#">下载源码</a>
+        <a href="https://github.com/already/seedweb/archive/master.zip">下载源码</a>
       </h4>
       <p>从GitHub可以直接下载到SeedWeb的源码。</p>
       <h4>
-        <a href="#">Clone or fork via GitHub</a>
+        <a href="https://github.com/already/seedweb">Clone or fork via GitHub</a>
       </h4>
       <p>访问Github源码库，你可以克隆整个项目，或者fork整个项目到你自己的账号。</p>
     </div>
